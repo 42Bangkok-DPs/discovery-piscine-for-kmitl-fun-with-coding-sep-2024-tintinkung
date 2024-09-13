@@ -1,0 +1,45 @@
+body{
+    margin: 0;
+    text-align: center;
+}
+
+.bg1{
+    background-image: url("https://lh3.googleusercontent.com/d/1IQhJSdNDSfvofSB-zH3fzE1MZSFXaCCt");
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 900px;
+}
+
+.bg1 p{
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 50vh;
+    font-size: 30px;
+    color: black;
+}
+
+.bg2{
+    background-image: url("https://lh3.googleusercontent.com/d/1_ro00fL2x4QfBnp4oBOlNkTiabROduwj");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+}
+
+.bg2 p{
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 50vh;
+    font-size: 30px;
+    color: black;
+}
+
+.break-line{
+    border: 10px solid black;
+    font-size: 40px;
+    background-color: pink;
+    text-align: center;
+}
