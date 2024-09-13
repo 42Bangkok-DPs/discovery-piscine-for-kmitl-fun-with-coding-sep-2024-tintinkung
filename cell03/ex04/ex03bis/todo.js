@@ -8,7 +8,6 @@ const render = () => {
     const empty_list = $("<div></div>")
       .text("No ToDos")
       .css({
-        color: "white",
         "font-size": "20px",
         "text-align": "center",
       })
