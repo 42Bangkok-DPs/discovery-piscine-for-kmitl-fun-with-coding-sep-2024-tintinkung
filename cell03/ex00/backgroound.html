@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Background</title>
+    <link rel="stylesheet" href="backgroound.css">
+</head>
+<body>
+    <script>
+        function change_back_color(){
+            var r = Math.floor(Math.random() * 256);
+            var g = Math.floor(Math.random() * 256);
+            var b = Math.floor(Math.random() * 256);
+            document.body.style.backgroundColor = 'rgb(' + r + ',' + g + ',' + b + ')';
+        }
+    </script>
+    <button onclick="change_back_color()">Click me</button>
+</body>
+</html>
