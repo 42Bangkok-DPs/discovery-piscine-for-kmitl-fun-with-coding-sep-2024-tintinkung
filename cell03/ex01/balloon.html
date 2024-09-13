@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Balloon</title>
+    <style>
+        #balloon {
+            border: 5px solid black;
+            background-color: red;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        body {
+            margin: 0px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="balloon" onclick="blow_up()"></div>
+</body>
+
+</html>
+<script>
+    var my_color = ["red", "green", "blue"];
+    var colors_state = 0;
+    var balloon = document.getElementById('balloon');
+    var balloon_size = 200;
+    function blow_up() {
+        if (balloon_size < 415) {
+            balloon_size += 10;
+            if (colors_state < 2) {
+                colors_state++;
+            }
+            else {
+                colors_state = 0;
+            }
+        }
+        else {
+            balloon_size = 200;
+            colors_state = 0;
+        }
+        balloon.style.backgroundColor = my_color[colors_state];
+        balloon.style.width = balloon_size + "px";
+        balloon.style.height = balloon_size + "px";
+    }
+    function deflate(){
+        if(balloon_size > 200){
+            balloon_size-=5;
+            if(colors_state > 0){
+                colors_state--;
+            }
+            else{
+                colors_state = 2;
+            }
+        }
+        balloon.style.backgroundColor = my_color[colors_state];
+        balloon.style.width = balloon_size + "px";
+        balloon.style.height = balloon_size + "px";
+    }
+    balloon.addEventListener('mouseout', deflate);
+</script>

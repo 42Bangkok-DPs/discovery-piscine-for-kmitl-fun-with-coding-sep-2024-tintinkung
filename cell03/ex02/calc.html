@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Calculator</title>
+    <style>
+        body {
+            margin: 0px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="input_field">
+        <input id="number1" type="text">
+        <select id="operater">
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+            <option value="%">%</option>
+        </select>
+        <input id="number2" type="text">
+        <button onclick="calculate()">Try me</button>
+    </div>
+</body>
+
+</html>
+<script>
+    var number1 = document.getElementById("number1");
+    var number2 = document.getElementById("number2");
+    var operater = document.getElementById("operater");
+    var result;
+    function calculate() {
+        var num1_string = number1.value;
+        var num2_string = number2.value;
+        var token_pass1;
+        var token_pass2;
+        for (var i = 0; i < num1_string.length; i++) {
+            if (num1_string[i].charCodeAt() > 47 && num1_string[i].charCodeAt() < 58) {
+                token_pass1 = 1;
+            }
+            else{
+                token_pass1 = 0;
+                break;
+            }
+        }
+        for (var i = 0; i < num2_string.length; i++) {
+            if (num2_string[i].charCodeAt() > 47 && num2_string[i].charCodeAt() < 58) {
+                token_pass2 = 1;
+            }
+            else{
+                token_pass2 = 0;
+                break;
+            }
+        }
+        var op = operater.value;
+        if(token_pass1 && token_pass2){
+            var num1 = parseInt(num1_string);
+            var num2 = parseInt(num2_string);
+            if(num2 == 0 && (op == '/' || op == '%')){
+                alert("It\'s over 9000");
+                console.log("It\'s over 9000");
+            }
+            else{
+                switch(op){
+                    case '+':
+                        result = num1 + num2;
+                        break;
+                    case '-':
+                        result = num1 - num2;
+                        break;
+                    case '*':
+                        result = num1 * num2;
+                        break;
+                    case '/':
+                        result = num1 / num2;
+                        break;
+                    case '%':
+                        result = num1 % num2;
+                        break;         
+                }
+                alert('result is ' + result);
+                console.log('result is ' + result);
+            }
+        }
+        else{
+            alert('error :(');
+            console.log('error:(');
+        }
+        number1.value = '';
+        number2.value = '';
+    }
+        
+    function alert_30_sec() {
+        alert('please use me. . .');
+    }
+
+    setInterval(function () {
+        alert_30_sec()
+    }, 30000);
+
+</script>

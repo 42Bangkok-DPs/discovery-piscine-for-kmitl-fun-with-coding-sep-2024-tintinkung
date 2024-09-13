@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Background</title>
+    <link rel="stylesheet" href="backgroound.css">
+</head>
+
+<body>
+    <button id="change_color">Click me</button>
+    <script src= "https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('#change_color').click(function(){
+                var r = Math.floor(Math.random() * 256);
+                var g = Math.floor(Math.random() * 256);
+                var b = Math.floor(Math.random() * 256);
+                var rgb_color = 'rgb(' + r + ',' + g + ',' + b + ')';
+                $('body').css('background-color', rgb_color);
+            });
+        });
+    </script>    
+</body>
+
+</html>
