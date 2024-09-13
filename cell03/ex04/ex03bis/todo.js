@@ -1,8 +1,12 @@
-let list = [];
+var list =  getCookie('todo') ||  [];
 const toDoEl = $("#ft_list");
 const addBtn = $("#addBtn");
 
 const render = () => {
+  const yesBtn = $('#yes-btn');
+  const noBtn = $('#no-btn');
+  const modal = $('#myModal');
+
   toDoEl.empty();
   if (!list.length) {
     const empty_list = $("<div></div>")
@@ -18,8 +22,19 @@ const render = () => {
 
   list.forEach((value, index) => {
     const toDoItem = createTodoElement(value);
+    const modals = modal[0];
+
     toDoItem.on("click", () => {
-      removeTodo(index);
+      yesBtn.on('click', () => {
+        removeTodo(index);
+        modals.close();
+      });
+
+      noBtn.on('click', () => {
+        modals.close();
+      });
+
+      modals.showModal();
     });
     toDoEl.append(toDoItem);
   });
@@ -32,13 +47,13 @@ const createTodoElement = (value) => {
 
 const addTodo = (value) => {
   list.push(value);
-  updateCookie(JSON.stringify(list));
+  updateCookie(list);
   render();
 };
 
 const removeTodo = (index) => {
   list.splice(index, 1);
-  updateCookie(JSON.stringify(list));
+  updateCookie(list);
   render();
 };
 
@@ -46,23 +61,15 @@ const updateCookie = (value) => {
   setCookie("toDo", value, 7);
 };
 
-const setCookie = (key, value, days) => {
-  const date = new Date();
-  date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
-  const expires = `expires=${date.toUTCString()}`;
-  document.cookie = `${key}=${value};${expires};path=/`;
+const setCookie = (key, value) => {
+  const encoded = encodeURI(JSON.stringify(value).replaceAll(";", "<SEMICOLON>"))
+  document.cookie = `${key}=${encoded}; path=/;`
 };
 
-const getCookie = (key) => {
-  const cookies = document.cookie.split(";");
+function getCookie(key) {
+  const cookies = document.cookie.match('(^|;)\\s*' + key + '\\s*=\\s*([^;]+)');
 
-  for (let i = 0; i < cookies.length; i++) {
-    const cookie = cookies[i].trim();
-    if (cookie.startsWith(key + "=")) {
-      return cookie.substring(key.length + 1);
-    }
-  }
-  return null;
+  return cookies ? JSON.parse(decodeURI(cookies.pop()).replaceAll("<SEMICOLON>", ";")) : [];
 };
 
 addBtn.on("click", () => {
@@ -74,7 +81,7 @@ addBtn.on("click", () => {
 
 const oldToDo = getCookie("toDo");
 if (oldToDo) {
-  list = JSON.parse(oldToDo);
+  list = oldToDo;
 }
 
 $(document).ready(() => {
